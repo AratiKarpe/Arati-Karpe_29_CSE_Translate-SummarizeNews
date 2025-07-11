@@ -1,0 +1,16 @@
+flask
+flask-cors
+werkzeug
+numpy
+Pillow
+python-docx
+pymupdf
+deep-translator
+easyocr
+transformers
+torch
+sentencepiece
+tqdm
+regex
+scipy
+googletrans==4.0.0-rc1

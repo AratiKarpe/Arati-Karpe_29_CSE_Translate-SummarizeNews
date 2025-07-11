@@ -1,0 +1,26 @@
+{
+    "s21_jagtap_vaishnavi@mgmcen.ac.in": {
+        "first_name": "VAISHNAVI",
+        "last_name": "JAGTAP",
+        "mobile": "+919209261367",
+        "password": "Vaishu@123"
+    },
+    "s21_kadam_vijaya@mgmcen.ac.in": {
+        "first_name": "VIJAYA",
+        "last_name": "KADAM",
+        "mobile": "+919356810341",
+        "password": "Vijaya@123456"
+    },
+    "s21_gaikwad_kishori@mgmcen.ac.in": {
+        "first_name": "KISHORI ",
+        "last_name": "GAIKWAD",
+        "mobile": "+918605343497",
+        "password": "Kishori@12345"
+    },
+    "s21_bhasarkar_mrunal@mgmcen.ac.in": {
+        "first_name": "MRUNAL ",
+        "last_name": "BHASARKAR",
+        "mobile": "+918485830446",
+        "password": "Mrunal@123"
+    }
+}
