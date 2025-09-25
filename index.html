@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Translate & Summarize News</title>
+
+  <!-- External CSS and FontAwesome -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="top-left">
+      <h1 class="main-title-inline">Translate & Summarize News</h1>
+    </div>
+
+    <div class="top-right">
+      <!-- 👤 User Info with Dropdown -->
+      <!-- ✅ With this updated block -->
+    <!-- 👤 User Info with Clickable Dropdown -->
+<div class="user-dropdown" onclick="toggleUserModal()">
+  <div class="user-avatar">
+    <i class="fas fa-user-circle"></i>
+  </div>
+  <span class="user-name">Welcome, {{ username or 'Demo' }}</span>
+</div>
+
+      
+      <!-- Navigation Buttons -->
+      <a href="javascript:void(0)" class="header-btn about" onclick="openAbout()">About</a>
+      <a href="/logout" class="header-btn logout">Logout</a>
+    </div>
+  </div>
+
+  
+
+  <!-- ✅ Upload File Section -->
+  <div class="upload-section">
+    <div class="upload-controls">
+      <div class="file-row">
+        <label for="fileInput" class="custom-file-upload">
+          <i class="fas fa-file-upload"></i> Choose File
+        </label>
+        
+        <input type="file" id="fileInput" name="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onchange="handleFileSelection(event)" style="display:none;">
+        <span id="fileNote">Allowed: PDF, DOC, JPG, JPEG, PNG</span>
+      </div>
+      <div id="filePreviewContainer" style="margin-top: 10px;"></div>
+   <div style="display: flex; align-items: center; gap: 10px;">
+  <button class="btn red" onclick="extractText()">Extract Text</button>
+  <span id="extractStatus" style="color: #00ccff;"></span>
+</div>
+
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="box-container">
+      <label><i class="fas fa-file-alt"></i> Extracted / Input Text:</label>
+
+      <textarea id="extractedText" class="text-box" rows="6" placeholder="Text will appear here after extraction. You can also type or edit manually."></textarea>
+
+    </div>
+
+    <div class="box-container">
+      <label><i class="fas fa-globe"></i> Select Language:</label>
+      <select id="languageSelect" class="text-box">
+        <!-- language options here -->
+        <option value="as">Assamese 🇮🇳</option>
+        <option value="bn">Bengali 🇮🇳</option>
+        <option value="gu">Gujarati 🇮🇳</option>
+        <option value="hi">Hindi 🇮🇳</option>
+        <option value="kn">Kannada 🇮🇳</option>
+        <option value="ml">Malayalam 🇮🇳</option>
+        <option value="mr">Marathi 🇮🇳</option>
+        <option value="ne">Nepali 🇳🇵</option>
+        <option value="or">Odia 🇮🇳</option>
+        <option value="pa">Punjabi 🇮🇳</option>
+        <option value="sa">Sanskrit 🔉</option>
+        <option value="sd">Sindhi 🇮🇳</option>
+        <option value="ta">Tamil 🇮🇳</option>
+        <option value="te">Telugu 🇮🇳</option>
+        <option value="ur">Urdu 🇮🇳</option>
+        <option value="ar">Arabic 🇸🇦</option>
+        <option value="zh-cn">Chinese 🇨🇳</option>
+        <option value="nl">Dutch 🇳🇱</option>
+        <option value="en">English 🇬🇧</option>
+        <option value="fr">French 🇫🇷</option>
+        <option value="de">German 🇩🇪</option>
+        <option value="he">Hebrew 🇮🇱</option>
+        <option value="id">Indonesian 🇮🇩</option>
+        <option value="it">Italian 🇮🇹</option>
+        <option value="ja">Japanese 🇯🇵</option>
+        <option value="ko">Korean 🇰🇷</option>
+        <option value="ms">Malay 🇲🇾</option>
+        <option value="fa">Persian 🇸🇮</option>
+        <option value="pl">Polish 🇵🇱</option>
+        <option value="pt">Portuguese 🇵🇹</option>
+        <option value="ru">Russian 🇷🇺</option>
+        <option value="es">Spanish 🇪🇸</option>
+        <option value="sv">Swedish 🇸🇪</option>
+        <option value="th">Thai 🇹🇭</option>
+        <option value="tr">Turkish 🇹🇷</option>
+        <option value="vi">Vietnamese 🇻🇳</option>
+      </select>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <button id="translateBtn" onclick="translateText()" class="btn">Translate</button>
+        <span id="translateStatus" style="color: #00ccff;"></span>
+      </div>
+      
+      <div style="display: flex; align-items: center;">
+        <button onclick="handleSummarize()" class="btn">Summarize</button>
+        <span id="summarizeStatus" style="margin-left: 10px; color: #00ccff;"></span>
+      </div>
+      
+    </div>
+
+    <div class="box-container">
+      <label><i class="fas fa-file-alt"></i> Translated Text:</label>
+      <textarea id="translatedText" class="text-box" rows="6" readonly></textarea>
+    </div>
+
+    <input type="hidden" id="translatedHidden">
+
+    <label style="margin-top: 15px; display: block;">
+      <input type="checkbox" id="useTranslation"> Use translated text for summarization (if available)
+    </label>
+
+    <hr id="summary-separator">
+
+    <div class="box-container">
+      <label><i class="fas fa-file-alt"></i> Summary Result:</label>
+      <textarea id="summaryResult" class="text-box" rows="6" readonly></textarea>
+      <button class="btn blue" onclick="downloadSummary()">Download Summary</button>
+    </div>
+  </div>
+ 
+
+<!-- 🌐 About Modal -->
+<div id="aboutModal" class="modal">
+  <div class="modal-content">
+    <span id="closeAbout" class="close-btn">&times;</span>
+
+    
+    <h2> About: How to Use Translate & Summarize News</h2>
+
+    <h3> Flow 1: Extract → Translate → Summarize (Translated Text)</h3>
+    <ul>
+      <li> Upload a file (PDF, DOC, JPG, PNG)</li>
+      <li> Click <strong>Extract Text</strong> to process the content</li>
+      <li> Select a language from the dropdown</li>
+      <li> Click <strong>Translate</strong></li>
+      <li> Check <strong>Use translated text for summarization</strong></li>
+      <li> Click <strong>Summarize</strong> to generate summary in translated language</li>
+      <li> Optionally, click <strong>Download Summary</strong></li>
+    </ul>
+
+    <h3> Flow 2: Extract → Summarize (Original Text)</h3>
+    <ul>
+      <li> Upload a file</li>
+      <li> Click <strong>Extract Text</strong></li>
+      <li> Skip language selection & translation</li>
+      <li> Keep the checkbox <strong>unchecked</strong></li>
+      <li> Click <strong>Summarize</strong> to summarize original content</li>
+    </ul>
+
+    <h3> Notes</h3>
+    <ul>
+      <li> Supported formats: PDF, DOC, DOCX, JPG, JPEG, PNG</li>
+      <li> Supports 30+ languages including Hindi, Marathi, Tamil, French, etc.</li>
+      <li> Uses AI4Bharat IndicBART for multilingual summarization</li>
+    </ul>
+
+    <p style="margin-top: 15px;"><strong> Contact:</strong> vijayakadam355@email.com</p>
+  </div>
+</div>
+
+<!-- 👤 User Profile Modal -->
+<div id="userModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeUserModal()">&times;</span>
+    <h2>User Profile</h2>
+    <form id="userForm">
+      <label>First Name:</label>
+      <input type="text" id="firstName" class="text-box">
+      
+      <label>Last Name:</label>
+      <input type="text" id="lastName" class="text-box">
+
+      <label>Email:</label>
+      <input type="email" id="email" class="text-box">
+
+      <label>Mobile:</label>
+      <input type="text" id="mobile" class="text-box">
+
+      <button type="button" class="btn" onclick="saveUserProfile()">Save</button>
+      <span id="saveStatus" style="margin-left: 10px; color: #00ccff;"></span>
+    </form>
+  </div>
+</div>
+
+
+<!-- ✅ JS Script -->
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

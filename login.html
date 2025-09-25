@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Translate & Summarize News</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body.auth-body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-image: url('https://img.freepik.com/free-vector/global-network-connection-world-map-digital-background_1017-23322.jpg');
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .auth-box {
+      width: 320px;
+      padding: 25px 30px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+      color: white;
+      text-align: center;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    input.valid {
+      border-color: #28a745;
+    }
+
+    input.invalid {
+      border-color: #ff4d4d;
+    }
+
+    .error-message {
+      color: #ff4d4d;
+      font-size: 12px;
+      text-align: left;
+      margin: 2px 0 5px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    .flash {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background-color: #222;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 350px;
+  color: white;
+  position: relative;
+}
+
+.close {
+  color: #aaa;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #fff;
+}
+
+.modal-content h2 {
+  color: #66ccff;  /* Or any color */ 
+}
+
+  </style>
+</head>
+
+<body class="auth-body login-page">
+  <div class="auth-page-wrapper">
+    <h1 class="login-title">📰 Translate & Summarize News</h1>
+
+    <div class="auth-box">
+      <h2>Login</h2>
+      <form action="/login" method="POST" onsubmit="return validateLoginForm()">
+        <input type="text" name="email_or_mobile" id="email_or_mobile" placeholder="Email or Mobile Number" required>
+        <div class="error-message" id="email_or_mobile-error"></div>
+
+        <input type="password" name="password" id="password" placeholder="Password" required>
+        <div class="error-message" id="password-error"></div> 
+        <button class="btn blue" type="submit">Login</button>
+      </form>
+      <p>Don't have an account? <a href="{{ url_for('register_page') }}">Register here</a></p>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash">{{ messages[0] }}</div>
+        {% endif %}
+      {% endwith %}
+    </div>
+  </div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Login validation
+    const emailOrMobile = document.getElementById("email_or_mobile");
+    const password = document.getElementById("password");
+
+    if (emailOrMobile) {
+      emailOrMobile.addEventListener("input", validateField);
+    }
+    if (password) {
+      password.addEventListener("input", validateField);
+    }
+    // Toggle password (if toggle element is present)
+    const togglePassword = document.getElementById("togglePassword");
+    if (togglePassword && password) {
+      togglePassword.addEventListener("click", () => {
+        const type = password.type === "password" ? "text" : "password";
+        password.type = type;
+        togglePassword.classList.toggle("fa-eye");
+        togglePassword.classList.toggle("fa-eye-slash");
+      });
+    }
+  });
+
+  function validateField(e) {
+    const id = e.target.id;
+    const val = e.target.value.trim();
+
+    if (id === "email_or_mobile") {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const mobileRegex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
+      if (!emailRegex.test(val) && !mobileRegex.test(val)) {
+        showError(id, "Enter a valid email or +countrycode mobile");
+      } else {
+        showError(id, '');
+      }
+    } else if (id === "password") {
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+      showError(id, !passwordRegex.test(val) ? "Min 8 characters with uppercase, lowercase, digit, symbol" : '');
+    }
+  }
+
+  function showError(id, message) {
+    const input = document.getElementById(id);
+    const error = document.getElementById(id + "-error");
+    if (input && error) {
+      if (message) {
+        input.classList.add("invalid");
+        input.classList.remove("valid");
+        error.textContent = message;
+      } else {
+        input.classList.remove("invalid");
+        input.classList.add("valid");
+        error.textContent = "";
+      }
+    }
+  }
+
+  function validateLoginForm() {
+    const inputs = document.querySelectorAll('.auth-box input');
+    inputs.forEach(input => input.dispatchEvent(new Event('input')));
+    return ![...inputs].some(i => i.classList.contains('invalid'));
+  }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,520 @@
+/* ✅ Global Styling Enhancements */
+body, .main-body, .auth-body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+  line-height: 1.6;
+  box-sizing: border-box;
+  position: relative;
+}
+
+body {
+  padding: 30px;
+  background-image: url('https://img.freepik.com/free-vector/abstract-world-map_1344-1.jpg');
+  font-family: Arial, sans-serif;
+  margin: 0;
+  color: #fff;
+}
+
+/* ✅ Auth & Dashboard Backgrounds */
+.auth-body, .main-body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: none;
+  padding: 20px;
+  position: relative;
+}
+
+.auth-body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://img.freepik.com/free-vector/global-network-connection-world-map-digital-background_1017-23322.jpg') center/cover no-repeat;
+  z-index: -1;
+}
+
+/* ✅ Unified Content Wrapper */
+.content-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+/* ✅ Title Refinements - BIGGER for Login Page */
+.main-title {
+  font-size: 5rem; /* Increased from 4rem to 5rem */
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 50px;
+  color: #fff;
+}
+
+/* ✅ Ensure wrapper takes full height and centers its content */
+.auth-page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;  /* Ensures it fills full screen height */
+  flex-direction: column;
+}
+
+.auth-box {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 30px 50px;
+  border-radius: 12px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  color: white;
+  z-index: 1;
+}
+
+.auth-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: none;
+}
+
+.auth-box .btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* ✅ Input Fields */
+select, input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  margin: 0 auto 15px auto;
+  box-sizing: border-box;
+  display: block;
+}
+
+/* ✅ Status Messages */
+#extractStatus, #translateStatus, #summarizeStatus {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #00ffff;
+  text-align: center;
+}
+
+/* ✅ File Upload Section */
+.upload-section {
+  margin-top: 40px; 
+  text-align: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* ✅ Upload Controls Aligned Left */
+.upload-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* ✅ New File Row Flex Container */
+.file-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ✅ Custom File Upload Button */
+.custom-file-upload {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease;
+}
+
+.custom-file-upload:hover {
+  background-color: #0056b3;
+}
+
+/* ✅ Hide real file input but keep it functional */
+input[type="file"] {
+  display: none;
+}
+
+/* ✅ File note styling */
+#fileNote {
+  color: #eee;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* ✅ Box Containers (Unified Width) */
+.box-container {
+  width: 100%;
+  margin: 0 auto 20px auto;
+  box-sizing: border-box;
+}
+
+/* ✅ Extracted Text Box */
+#extractedText {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  resize: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ✅ Translated and Summary Textareas */
+#translatedText, #summaryResult {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 10px;
+  resize: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ✅ Final Updated Textarea Styling */
+textarea {
+  width: 100%;
+  min-height: 200px;
+  padding: 15px;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  resize: vertical;
+  background-color: #fefefe;
+  color: #000;
+  box-sizing: border-box;
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+/* ✅ Labels */
+.label-heading, #translateLabel, label {
+  font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+/* ✅ Buttons Styling (No Center) */
+.btn, .btn.red, .btn.blue, .upload-btn, button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 18px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  border: none;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+/* ✅ Button Hover Effects */
+.btn:hover, .btn.red:hover, .btn.blue:hover, .upload-btn:hover, button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+/* ✅ Image Preview */
+#imagePreview {
+  max-width: 40%;
+  height: auto;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: none;
+}
+
+/* ✅ File Preview Box */
+.file-preview-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #5a67d8;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 12px;
+  max-width: 300px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.file-preview-box a {
+  color: #5a67d8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.file-preview-box a:hover {
+  text-decoration: underline;
+}
+
+.file-preview-box img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 600px) {
+  .main-title {
+    font-size: 32px;
+    margin: 20px 0;
+  }
+
+  .upload-container, .box-container, .form-section, .content-wrapper {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+/* ✅ Top Bar & Misc */
+.top-bar {
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  padding: 14px 0px;
+  color: white;
+  position:none;
+  top: 0;
+  z-index: 1000;
+  /* border-bottom: #000 3px solid; */
+  box-shadow: 1px 1px 8px rgba(24, 35, 75, 0.812) ;
+}
+
+.top-left h1 {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.top-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+body {
+  padding-top: 20px; /* Adjust based on top-bar height */
+}
+
+
+
+.main-title-inline {
+  font-size: 2.4rem;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+  flex: 1;
+}
+
+.user-text {
+  white-space: nowrap;
+  margin-right: 10px;
+}
+
+
+
+/* ✅ Main Title Styling in Auth Box (Login Page Specific) */
+.auth-box .main-title {
+  font-size: 6rem !important; /* Increased from 5rem and added !important to ensure override */
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+
+/* ✅ Large Title Styling for Login Page */
+.login-title {
+  font-size: 3rem; /* You can adjust this as needed */
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #ffffff;
+}
+/* Shared style */
+.header-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  font-family: 'Segoe UI', sans-serif;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+}
+
+/* About Button */
+.about {
+  background-color: #0077b6;
+  color: #ffffff;
+  border: 1px solid #0077b6;
+}
+
+.about:hover {
+  background-color: #005f8a;
+  border-color: #005f8a;
+  color: #f0f0f0;
+}
+
+/* Logout Button */
+.logout {
+  background-color: #d00000;
+  color: #ffffff;
+  border: 1px solid #d00000;
+  margin-right: 8px;
+}
+
+.logout:hover {
+  background-color: #8c0000;
+  border-color: #8c0000;
+  color: #ffffff;
+}
+/* Modal overlay */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6); /* dark transparent background */
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Modal content box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 8% auto;
+  padding: 30px;
+  border-radius: 12px;
+  width: 60%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  color: #333;
+  font-size: 16px;
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Close button (×) */
+.close-btn {
+  color: #ff4d4d;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.close-btn:hover {
+  color: #d60000;
+}
+
+/* Headings inside modal */
+.modal-content h2 {
+  color: #2c3e50;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.modal-content h3 {
+  color: #0077cc;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+/* Bullet list */
+.modal-content ul {
+  margin-left: 20px;
+  line-height: 1.6;
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+#extractStatus,
+#translateStatus,
+#summarizeStatus {
+  font-size: 14px;
+  color: #00ccff;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.user-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.user-dropdown:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.user-avatar i {
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.user-name {
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+}
